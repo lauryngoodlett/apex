@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>APEX · Career Platform · Lauryn Goodlett</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,700;1,400&display=swap" rel="stylesheet">
+  <style>
+    @font-face{font-family:'General Sans';src:url('https://lauryngoodlett.github.io/subledger/GeneralSans-Light.otf') format('opentype');font-weight:300;font-style:normal}
+    @font-face{font-family:'General Sans';src:url('https://lauryngoodlett.github.io/subledger/GeneralSans-Regular.otf') format('opentype');font-weight:400;font-style:normal}
+    @font-face{font-family:'General Sans';src:url('https://lauryngoodlett.github.io/subledger/GeneralSans-Italic.otf') format('opentype');font-weight:400;font-style:italic}
+    @font-face{font-family:'General Sans';src:url('https://lauryngoodlett.github.io/subledger/GeneralSans-Medium.otf') format('opentype');font-weight:500;font-style:normal}
+    @font-face{font-family:'General Sans';src:url('https://lauryngoodlett.github.io/subledger/GeneralSans-Semibold.otf') format('opentype');font-weight:600;font-style:normal}
+    @font-face{font-family:'General Sans';src:url('https://lauryngoodlett.github.io/subledger/GeneralSans-Bold.otf') format('opentype');font-weight:700;font-style:normal}
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #FAF9F6;
+      --surface: #FFFFFF;
+      --ink: #1D1F21;
+      --ink-2: #3A3C3E;
+      --ink-3: #6B6D6F;
+      --ink-4: #6E6E6B;
+      --ink-5: #C8C8C2;
+      --line: #E8E8E4;
+      --line-2: #D8D8D2;
+      --accent: #1B3668;
+      --accent-soft: #FAEAEA;
+      --font: 'General Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+      --serif: 'Fraunces', Georgia, serif;
+      --max: 760px;
+    }
+
+    html { font-size: 16px; scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font);
+      font-weight: 500;
+      color: var(--ink);
+      background: linear-gradient(180deg, #F7EFEE 0%, #FAF9F6 480px) fixed, var(--bg);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    /* ── Nav ── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: #1D1F21;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .nav-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 40px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .nav-logo { font-size: 15px; font-weight: 600; color: #FAF9F6; }
+    .nav-links { display: flex; gap: 24px; align-items: center; }
+    .nav-links a { font-size: 14px; color: rgba(255,255,255,0.6); }
+    .nav-links a:hover { color: #fff; text-decoration: none; }
+    .nav-resume {
+      font-size: 14px;
+      font-weight: 600;
+      color: #1D1F21 !important;
+      background: #FAF9F6;
+      border-radius: 20px;
+      padding: 7px 16px;
+    }
+    .nav-resume:hover { opacity: 0.9; }
+
+    .back-link {
+      display: block;
+      font-size: 13px;
+      color: var(--ink-4);
+      padding: 20px 40px 0;
+      max-width: calc(var(--max) + 80px);
+      margin: 0 auto;
+    }
+    .back-link:hover { color: var(--ink); text-decoration: none; }
+
+    /* ── Page wrapper ── */
+    .page { max-width: var(--max); margin: 0 auto; padding: 0 40px 120px; }
+
+    /* ── Hero ── */
+    .hero { padding: 56px 0 32px; }
+
+    .tags {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--ink-3);
+      background: var(--surface);
+      border: 1px solid var(--line-2);
+      padding: 4px 12px;
+      border-radius: 20px;
+      margin-bottom: 20px;
+    }
+
+    h1 {
+      font-family: var(--serif);
+      font-size: clamp(36px, 5vw, 52px);
+      font-weight: 700;
+      line-height: 1.08;
+      letter-spacing: -0.02em;
+      margin-bottom: 40px;
+      color: var(--ink);
+    }
+    h1 em { font-style: italic; font-weight: 400; color: var(--ink-2); }
+
+    /* ── Stats row ── */
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0;
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      margin-bottom: 40px;
+      padding: 28px 0;
+    }
+    .stat { padding-right: 24px; }
+    .stat + .stat { padding-left: 24px; border-left: 1px solid var(--line); }
+    .stat-value { font-size: 28px; font-weight: 700; letter-spacing: -0.03em; color: var(--ink); line-height: 1; margin-bottom: 6px; }
+    .stat-label { font-size: 13px; color: var(--ink-3); line-height: 1.4; }
+
+    /* ── Metadata grid ── */
+    .meta {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px 40px;
+      margin-bottom: 56px;
+      padding-bottom: 48px;
+      border-bottom: 1px solid var(--line);
+    }
+    .meta-label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink-4); margin-bottom: 4px; font-weight: 600; }
+    .meta-value { font-size: 14px; color: var(--ink); font-weight: 500; }
+
+    /* ── Hero image ── */
+    .hero-image { width: 100%; border-radius: 12px; background: var(--line); margin-bottom: 80px; display: block; overflow: hidden; box-shadow: 0 4px 24px rgba(29,31,33,.08); }
+    .hero-image img { width: 100%; display: block; border-radius: 12px; }
+    .hero-image-placeholder { width: 100%; aspect-ratio: 16/9; background: var(--line); border-radius: 12px; margin-bottom: 80px; display: flex; align-items: center; justify-content: center; color: var(--ink-4); font-size: 13px; }
+
+    /* ── Sections ── */
+    .section { padding: 48px 0; }
+    .section + .section { border-top: 1px solid var(--line); }
+
+    .section-label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--ink-4);
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+
+    h2 {
+      font-family: var(--font);
+      font-size: clamp(22px, 2.8vw, 32px);
+      font-weight: 600;
+      line-height: 1.15;
+      letter-spacing: -0.01em;
+      margin-bottom: 16px;
+      color: var(--ink);
+    }
+
+    p {
+      font-size: 15px;
+      line-height: 1.75;
+      color: var(--ink-3);
+      margin-bottom: 20px;
+      font-weight: 500;
+    }
+    p:last-child { margin-bottom: 0; }
+    p strong { color: var(--ink-2); font-weight: 600; }
+
+    /* ── Quote ── */
+    .quote-block {
+      background: #FDF0F0;
+      border: 1px solid #E8CECE;
+      border-radius: 14px;
+      padding: 24px 26px;
+      margin: 24px 0;
+    }
+    .quote-text { font-size: 16px; line-height: 1.6; color: var(--ink-2); font-style: italic; margin-bottom: 16px; font-weight: 500; }
+    .quote-meta { display: flex; align-items: center; gap: 10px; }
+    .quote-avatar { width: 32px; height: 32px; border-radius: 50%; background: var(--line); display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 600; color: var(--ink-3); flex-shrink: 0; }
+    .quote-attribution { font-size: 12px; color: var(--ink-4); line-height: 1.4; }
+
+    /* ── Design note callout ── */
+    .design-note {
+      margin: 24px 0;
+      padding: 20px 24px;
+      border-left: 2px solid var(--ink-5);
+      background: var(--surface);
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--ink-3);
+      line-height: 1.75;
+      display: flex;
+      gap: 10px;
+    }
+    .design-note-icon { flex-shrink: 0; }
+
+    /* ── Inline stats ── */
+    .inline-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin: 32px 0; }
+    .inline-stat { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 20px; }
+    .inline-stat-value { font-size: 24px; font-weight: 700; letter-spacing: -0.02em; color: var(--ink); margin-bottom: 6px; }
+    .inline-stat-label { font-size: 12px; color: var(--ink-3); line-height: 1.4; font-weight: 500; }
+
+    /* ── Numbered complexity list ── */
+    .numbered-list { margin: 24px 0; border-top: 1px solid var(--line); }
+    .numbered-item { display: flex; gap: 24px; padding: 20px 0; border-bottom: 1px solid var(--line); align-items: flex-start; }
+    .numbered-item-num { font-family: var(--serif); font-size: 38px; font-weight: 700; color: var(--line-2); line-height: 1; flex-shrink: 0; min-width: 52px; letter-spacing: -0.02em; }
+    .numbered-item-text { font-size: 15px; line-height: 1.65; color: var(--ink-3); font-weight: 500; padding-top: 6px; }
+
+    /* ── Workflow diagram ── */
+    .workflow { margin: 32px 0; border: 1px solid var(--line); border-radius: 12px; overflow: hidden; background: var(--surface); box-shadow: 0 4px 20px rgba(29,31,33,.06); }
+    .workflow-row { display: flex; align-items: stretch; border-bottom: 1px solid var(--line); }
+    .workflow-row:last-child { border-bottom: none; }
+    .workflow-actor { width: 120px; flex-shrink: 0; padding: 12px 16px; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink-4); background: #F7F7F4; border-right: 1px solid var(--line); display: flex; align-items: center; }
+    .workflow-stages { display: flex; flex-wrap: wrap; gap: 8px; padding: 12px 16px; align-items: center; }
+    .workflow-stage { font-size: 13px; color: var(--ink-2); background: var(--surface); border: 1px solid var(--line); border-radius: 6px; padding: 4px 10px; font-weight: 500; }
+    .workflow-stage.conditional { color: var(--ink-4); border-style: dashed; font-style: italic; }
+
+    /* ── Screen cards ── */
+    .screen-cards { display: flex; flex-direction: column; gap: 56px; margin: 32px 0; }
+
+    .screen-card-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 4px; }
+    .screen-card-num { font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--ink-4); font-weight: 600; }
+    .screen-card-breadcrumb { font-size: 12px; color: var(--ink-4); margin-bottom: 14px; font-weight: 500; }
+
+    .screen-card-image { width: 100%; background: var(--line); border-radius: 12px; margin-bottom: 24px; display: block; overflow: hidden; border: 1px solid var(--line); box-shadow: 0 4px 24px rgba(29,31,33,.08); }
+    .screen-card-image img { width: 100%; display: block; border-radius: 12px; }
+    .screen-card-image-placeholder { width: 100%; aspect-ratio: 16/10; background: #F5ECEA; border-radius: 12px; margin-bottom: 24px; display: flex; align-items: center; justify-content: center; color: var(--ink-4); font-size: 13px; }
+
+    .screen-card-title { font-size: 16px; font-weight: 600; margin-bottom: 8px; color: var(--ink); }
+    .screen-card-desc { font-size: 14px; color: var(--ink-3); line-height: 1.65; margin-bottom: 24px; font-weight: 500; }
+
+    .screen-annotations { border-top: 1px solid var(--line); padding-top: 20px; display: flex; flex-direction: column; gap: 16px; }
+    .annotation { display: flex; gap: 12px; padding: 12px 16px; background: var(--surface); border: 1px solid var(--line); border-radius: 8px; }
+    .ann-num { width: 22px; height: 22px; border-radius: 50%; background: var(--ink); color: #fff; font-size: 10px; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; }
+    .annotation-body { font-size: 13px; line-height: 1.55; color: var(--ink-3); font-weight: 500; }
+    .annotation-body strong { display: block; font-weight: 700; color: var(--ink-2); margin-bottom: 3px; font-size: 12px; letter-spacing: 0.01em; }
+
+    /* ── Key decisions ── */
+    .decisions { margin: 24px 0; border-top: 1px solid var(--line); }
+    .decision { display: flex; gap: 24px; padding: 24px 0; border-bottom: 1px solid var(--line); align-items: flex-start; }
+    .decision-num { font-family: var(--serif); font-size: 38px; font-weight: 700; color: var(--line-2); line-height: 1; flex-shrink: 0; min-width: 52px; letter-spacing: -0.02em; }
+    .decision-title { font-size: 16px; font-weight: 600; margin-bottom: 8px; color: var(--ink); }
+    .decision-text { font-size: 14px; line-height: 1.65; color: var(--ink-3); font-weight: 500; }
+
+    /* ── Outcomes ── */
+    .outcomes { display: flex; flex-direction: column; gap: 0; margin: 24px 0; }
+    .outcome { display: grid; grid-template-columns: 32px 1fr; gap: 20px; padding: 24px; margin-bottom: 12px; background: var(--surface); border: 1px solid var(--line); border-radius: 12px; align-items: start; }
+    .outcome-icon { font-size: 18px; padding-top: 2px; }
+    .outcome-title { font-size: 15px; font-weight: 600; margin-bottom: 4px; color: var(--ink); }
+    .outcome-desc { font-size: 13px; line-height: 1.55; color: var(--ink-3); font-weight: 500; }
+
+    /* ── More work ── */
+    .more-work { margin-top: 80px; padding-top: 40px; border-top: 1px solid var(--line); }
+    .more-work .section-label { margin-bottom: 16px; }
+    .case-study-link { display: block; padding: 20px 24px; border: 1px solid var(--line); border-radius: 12px; font-size: 14px; color: var(--ink-3); transition: border-color 0.15s, box-shadow 0.15s; background: var(--surface); margin-bottom: 12px; }
+    .case-study-link:hover { color: var(--ink); text-decoration: none; border-color: var(--line-2); box-shadow: 0 4px 16px rgba(29,31,33,.06); }
+    .case-study-link-tags { font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink-4); margin-bottom: 6px; font-weight: 600; }
+    .case-study-link-title { font-weight: 600; color: var(--ink); font-size: 15px; }
+    .case-study-link-arrow { margin-left: 4px; }
+
+    /* ── Footer ── */
+    footer {
+      width: 100%;
+      background: #1D1F21;
+      padding: 72px 40px 48px;
+      box-sizing: border-box;
+    }
+    .footer-inner {
+      max-width: var(--max);
+      margin: 0 auto;
+    }
+    .footer-heading {
+      font-family: var(--serif);
+      font-size: 36px;
+      font-weight: 700;
+      color: #FAF9F6;
+      margin-bottom: 32px;
+      letter-spacing: -0.02em;
+    }
+    .footer-links {
+      display: flex;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+    .footer-links a {
+      font-size: 14px;
+      color: rgba(255,255,255,0.5);
+      font-weight: 500;
+    }
+    .footer-links a:hover { color: #fff; text-decoration: none; }
+    .footer-resume {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: #FAF9F6;
+      color: #1D1F21 !important;
+      font-size: 14px;
+      font-weight: 700 !important;
+      border-radius: 50px;
+      padding: 10px 20px;
+      margin-bottom: 32px;
+    }
+
+    @media (max-width: 600px) {
+      .nav-inner, .back-link, .page { padding-left: 20px; padding-right: 20px; }
+      .stats { grid-template-columns: 1fr; gap: 20px; }
+      .stat + .stat { padding-left: 0; border-left: none; border-top: 1px solid var(--line); padding-top: 20px; }
+      .meta { grid-template-columns: 1fr; }
+      .inline-stats { grid-template-columns: 1fr; }
+      .workflow-actor { width: 80px; font-size: 10px; padding: 8px; }
+      .numbered-item-num, .decision-num { font-size: 28px; min-width: 36px; }
+      footer { padding: 48px 20px 32px; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="nav-inner">
+      <a class="nav-logo" href="https://lauryngoodlett.com">Lauryn Goodlett</a>
+      <div class="nav-links">
+        <a href="https://lauryngoodlett.com/about">About</a>
+        <a href="https://lauryngoodlett.com/work">Work</a>
+        <a href="https://framerusercontent.com/assets/jMb0P5BuJm1ZGgocCLXu2w1EI0.pdf" class="nav-resume">Resume</a>
+      </div>
+    </div>
+  </nav>
+
+  <a class="back-link" href="https://lauryngoodlett.com/work">← Back to Case Studies</a>
+
+  <main class="page">
+
+    <div class="hero">
+      <div class="tags">Product Strategy · Platform Redesign · Career Navigation</div>
+
+      <h1>Designing a career platform <em>for SVA's 750,000+ veteran network</em></h1>
+
+      <div class="stats">
+        <div class="stat">
+          <div class="stat-value">75%</div>
+          <div class="stat-label">adoption among launch cohort</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">100%</div>
+          <div class="stat-label">of career coaches adopted as a primary tool</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">60%</div>
+          <div class="stat-label">increase in employer partnerships</div>
+        </div>
+      </div>
+
+      <div class="meta">
+        <div class="meta-item">
+          <div class="meta-label">Role</div>
+          <div class="meta-value">Lead Designer</div>
+        </div>
+        <div class="meta-item">
+          <div class="meta-label">Timeline</div>
+          <div class="meta-value">Aug 2023 – Apr 2025</div>
+        </div>
+        <div class="meta-item">
+          <div class="meta-label">Client</div>
+          <div class="meta-value">Student Veterans of America via Vantage Point Consulting</div>
+        </div>
+        <div class="meta-item">
+          <div class="meta-label">Collaborators</div>
+          <div class="meta-value">PM, SVA Product Owner, Junior Designer (V2)</div>
+        </div>
+        <div class="meta-item">
+          <div class="meta-label">Status</div>
+          <div class="meta-value">Launched</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- What I owned -->
+    <div class="design-note" style="margin-bottom: 56px;">
+      <span class="design-note-icon">📋</span>
+      <span><strong style="color: var(--ink-2); display: block; margin-bottom: 4px;">What I owned</strong>End-to-end design direction across all five platform surfaces: research synthesis and coach sessions, onboarding architecture, dashboard, assessments, and developer handoff. The core structural decisions — adaptive branching logic, the single-highlighted-assessment model, the job standardization schema — were mine. I collaborated with a junior designer on visual execution for the search and institution explore pages during the final sprint.</span>
+    </div>
+
+    <!-- Hero image -->
+    <div class="hero-image">
+      <img src="hero.png" alt="APEX career platform — dashboard and onboarding overview" />
+    </div>
+
+
+    <!-- ── THE PROBLEM ── -->
+    <section class="section">
+      <p class="section-label">The problem</p>
+      <h2>A career platform veterans visited once and never returned to</h2>
+
+      <p>SVA's APEX platform existed to help student veterans explore careers, find jobs, and connect with educational pathways. In practice, it wasn't working. Veterans would log in once, find it unclear or overwhelming, and leave without taking any meaningful action. Career coaches were working around it rather than through it.</p>
+
+      <p>The platform had been built by combining two existing tools — CareerPath Decide (CPD), which had deep military-specific data but was dense and outdated, and Exponential Pathways (XP), which had a more modern interface but lacked the depth veterans needed. The first version merged them, but inherited the weaknesses of both.</p>
+
+      <div class="design-note">
+        <span class="design-note-icon">✏️</span>
+        <span>The fundamental problem wasn't missing features. It was that the platform treated veterans as if they already knew what they wanted — and presented a dashboard full of options to people who, in many cases, were navigating one of the most uncertain transitions of their lives.</span>
+      </div>
+
+      <div class="inline-stats">
+        <div class="inline-stat">
+          <div class="inline-stat-value">750K+</div>
+          <div class="inline-stat-label">SVA members the platform serves</div>
+        </div>
+        <div class="inline-stat">
+          <div class="inline-stat-value">2</div>
+          <div class="inline-stat-label">legacy tools being merged into one</div>
+        </div>
+        <div class="inline-stat">
+          <div class="inline-stat-value">0</div>
+          <div class="inline-stat-label">clear starting point on the existing dashboard</div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ── WHY THIS WAS COMPLEX ── -->
+    <section class="section">
+      <p class="section-label">Why this was uniquely complex</p>
+      <h2>Veterans in transition don't fit a single user model</h2>
+
+      <div class="numbered-list">
+        <div class="numbered-item">
+          <span class="numbered-item-num">01</span>
+          <span class="numbered-item-text">Users arrived in fundamentally different situations — some transitioning straight out of service, some already enrolled in school, many with no clear sense of which direction to go first</span>
+        </div>
+        <div class="numbered-item">
+          <span class="numbered-item-num">02</span>
+          <span class="numbered-item-text">Military experience doesn't translate cleanly to civilian job categories — mapping service history to relevant careers and education required a system, not just a search bar</span>
+        </div>
+        <div class="numbered-item">
+          <span class="numbered-item-num">03</span>
+          <span class="numbered-item-text">Live job postings from employer partners arrived in wildly inconsistent formats with varying terminology, making a coherent job details experience nearly impossible without standardization</span>
+        </div>
+        <div class="numbered-item">
+          <span class="numbered-item-num">04</span>
+          <span class="numbered-item-text">Two distinct user groups with different needs: veterans navigating their path, and career coaches guiding members through sessions — the platform had to work for both simultaneously</span>
+        </div>
+        <div class="numbered-item">
+          <span class="numbered-item-num">05</span>
+          <span class="numbered-item-text">Salesforce integration was a hard constraint — APEX and SVA's case management system had to share member data without creating duplicate records, which shaped how onboarding was structured end-to-end</span>
+        </div>
+        <div class="numbered-item">
+          <span class="numbered-item-num">06</span>
+          <span class="numbered-item-text">Tight design timeline: 10 weeks for all V2 design work (Oct–Dec 2024), with development running through April 2025</span>
+        </div>
+      </div>
+
+      <div class="design-note">
+        <span class="design-note-icon">✏️</span>
+        <span>V1 failed not because of a bad UI — it failed because the information architecture assumed a type of user that didn't exist. No veteran arrives knowing exactly what they want. The design had to accommodate that uncertainty by default.</span>
+      </div>
+    </section>
+
+
+    <!-- ── UNDERSTANDING THE USER ── -->
+    <section class="section">
+      <p class="section-label">Understanding the user</p>
+      <h2>Veterans needed guidance before they needed features</h2>
+
+      <p>Before designing anything, I led a structured Design Thinking session with SVA career coaches (Oct 3, 2024). Coaches were the closest proxy to member experience — they sat with veterans weekly and knew exactly where APEX fell short. Three things came out clearly: members didn't know where to start, coaches wanted to see member profiles before sessions, and the platform felt like a database rather than a guide.</p>
+
+      <p>That research shaped the core onboarding question: what is this veteran actually trying to figure out right now? Some were focused on financial stability — they needed a job, quickly. Some wanted work that connected to their military identity. Others were genuinely undecided and needed the platform to help them figure out what question to ask first. I used Maslow, Herzberg, and Self-Determination Theory not as academic scaffolding, but as a practical taxonomy for bucketing those different starting points — so the onboarding flow could route each veteran to the right first assessment rather than dumping everyone onto the same screen.
+
+      <div class="design-note">
+        <span class="design-note-icon">✏️</span>
+        <span>The key insight from research: a veteran's "why" for using APEX isn't uniform. Designing one generic onboarding flow for all of them guaranteed it would work well for none of them. The onboarding needed to identify motivation type first, then route accordingly.</span>
+      </div>
+
+      <p>I also ran a competitive analysis of how Niche.com, LinkedIn, Coursera, Duolingo, and Zillow handled personalization, assessment flows, filtering, and alignment indicators. One finding directly shaped a core design decision: CPD's biggest failure was presenting all assessments side-by-side with no guidance. Veterans didn't know where to start and left without completing any.</p>
+
+      <p style="margin-top: 20px;"><strong>The user journey we designed for:</strong></p>
+
+      <div class="workflow">
+        <div class="workflow-row">
+          <div class="workflow-actor">Veteran</div>
+          <div class="workflow-stages">
+            <span class="workflow-stage">Onboarding</span>
+            <span class="workflow-stage">Dashboard</span>
+            <span class="workflow-stage">Assessment</span>
+            <span class="workflow-stage">Explore occupations</span>
+            <span class="workflow-stage">Explore institutions</span>
+            <span class="workflow-stage">Apply / connect</span>
+          </div>
+        </div>
+        <div class="workflow-row">
+          <div class="workflow-actor">Career Coach</div>
+          <div class="workflow-stages">
+            <span class="workflow-stage">View member profile</span>
+            <span class="workflow-stage">Guide session</span>
+            <span class="workflow-stage">Schedule follow-up</span>
+          </div>
+        </div>
+        <div class="workflow-row">
+          <div class="workflow-actor">SVA / System</div>
+          <div class="workflow-stages">
+            <span class="workflow-stage">Salesforce sync</span>
+            <span class="workflow-stage conditional">Coach notification (conditional)</span>
+            <span class="workflow-stage">Employer matching</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ── THE DESIGN ── -->
+    <section class="section">
+      <p class="section-label">The design</p>
+      <h2>Personalization had to happen before the dashboard, not on it</h2>
+
+      <p>The V2 redesign covered five interconnected surfaces: adaptive onboarding, a personalized dashboard, three assessments (Work Experience, Interest, and Education), occupation and institution explore pages with veteran-specific filters, and AI-standardized job detail pages. Each surface fed the next — onboarding data shaped what the dashboard surfaced, assessments shaped what appeared in explore, and the job schema made the detail pages consistent regardless of source.</p>
+
+      <p>Two of the most critical surfaces were onboarding — which established the personalization model for everything downstream — and the assessments, where collecting the right data in the right order determined whether recommendations felt relevant or random. Those are shown below.</p>
+
+      <div class="screen-cards">
+
+        <div class="screen-card">
+          <div class="screen-card-header">
+            <span class="screen-card-num">Screen 01 of 02</span>
+          </div>
+          <p class="screen-card-breadcrumb">apex / onboarding / military background</p>
+
+          <div class="screen-card-image">
+            <img src="screen-01.png" alt="APEX adaptive onboarding — military branch selection with skills progress sidebar" />
+          </div>
+
+          <p class="screen-card-title">Adaptive onboarding — branching by background</p>
+          <p class="screen-card-desc">The skills assessment intake routes differently based on service history. Veterans select their branch, which determines the rank and MOS questions that follow. A persistent sidebar shows exactly where they are in the process — Career Goal, Military Skills, Other Skills, Education, Results — so the flow never feels open-ended.</p>
+
+          <div class="screen-annotations">
+            <div class="annotation">
+              <div class="ann-num">1</div>
+              <div class="annotation-body">
+                <strong>Branch selection drives downstream branching</strong>
+                Choosing Air Force vs. Army vs. Coast Guard isn't just a data field — it determines which rank structures and occupational series appear next. Civilian users skip this track entirely.
+              </div>
+            </div>
+            <div class="annotation">
+              <div class="ann-num">2</div>
+              <div class="annotation-body">
+                <strong>Sidebar as progress contract</strong>
+                The "A Look at Your Skills" sidebar makes the full shape of the flow visible upfront. Veterans know how many steps remain and what they're building toward, which reduces abandonment on longer flows.
+              </div>
+            </div>
+            <div class="annotation">
+              <div class="ann-num">3</div>
+              <div class="annotation-body">
+                <strong>Collect only what the system will use</strong>
+                Every question in this flow maps directly to a downstream recommendation. Branch and rank feed into the military-to-civilian skills translation. Nothing is collected speculatively.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="screen-card">
+          <div class="screen-card-header">
+            <span class="screen-card-num">Screen 02 of 02</span>
+          </div>
+          <p class="screen-card-breadcrumb">apex / assessments / interest results</p>
+
+          <div class="screen-card-image">
+            <img src="screen-02.png" alt="APEX interest assessment — active question with real-time results panel" />
+          </div>
+
+          <p class="screen-card-title">Interest assessment with real-time results</p>
+          <p class="screen-card-desc">The interest assessment presents a single statement at a time — "I like to: Working with others" — with three response levels rather than a Likert scale. As veterans respond, results build in real time in the sidebar panel: a radar chart maps their Holland Code profile across six interest categories, and their most prominent traits update live.</p>
+
+          <div class="screen-annotations">
+            <div class="annotation">
+              <div class="ann-num">1</div>
+              <div class="annotation-body">
+                <strong>Holland Interest Codes as the underlying model</strong>
+                Responses map to the RIASEC framework — Realistic, Investigative, Artistic, Social, Enterprising, Conventional. The radar chart makes that scoring visible and legible to non-specialists.
+              </div>
+            </div>
+            <div class="annotation">
+              <div class="ann-num">2</div>
+              <div class="annotation-body">
+                <strong>Progress counter prevents uncertainty</strong>
+                "30 / 30" in the sidebar shows exactly how far through the assessment the veteran is. Combined with single-question-per-screen format, the flow feels fast and finite rather than endless.
+              </div>
+            </div>
+            <div class="annotation">
+              <div class="ann-num">3</div>
+              <div class="annotation-body">
+                <strong>Results surface while the assessment is still in progress</strong>
+                The results panel updates as responses come in — veterans can see their profile taking shape before they finish. This makes the assessment feel like a discovery, not a data collection form.
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ── KEY DECISIONS ── -->
+    <section class="section">
+      <p class="section-label">Key decisions</p>
+      <h2>Three decisions changed the direction of the project</h2>
+
+      <div class="decisions">
+
+        <div class="decision">
+          <span class="decision-num">01</span>
+          <div class="decision-body">
+            <p class="decision-title">Behavioral frameworks before wireframes</p>
+            <p class="decision-text">Before designing a single screen, I mapped veteran motivation types to Maslow's hierarchy, Herzberg's two-factor theory, and Self-Determination Theory. This determined how onboarding questions were ordered, what categories responses were bucketed into, and which assessment was recommended for each motivation type. It wasn't academic — it was the architecture that made personalization possible downstream.</p>
+          </div>
+        </div>
+
+        <div class="decision">
+          <span class="decision-num">02</span>
+          <div class="decision-body">
+            <p class="decision-title">Structured job posting standardization</p>
+            <p class="decision-text">Live job postings from partner employers arrived in inconsistent formats with varying terminology. Presenting them as-is meant the job details page felt unreliable. I designed a structured JSON categorization schema, prototyped with ChatGPT, to parse incoming postings into standardized fields — responsibilities, qualifications, location, clearance, schedule — so every job detail page rendered consistently regardless of source. This was a systems decision as much as a UX one.</p>
+          </div>
+        </div>
+
+        <div class="decision">
+          <span class="decision-num">03</span>
+          <div class="decision-body">
+            <p class="decision-title">Designed for two-sided platform, built for one side first</p>
+            <p class="decision-text">Business requesters — employers and institutional partners — weren't ready to enter the platform at V2 launch. Rather than removing them from the design, I designed the workflow so their entry point was already accounted for: approval flows, visibility controls, and role-based access for partners are built in. When they enter the system, the workflow won't need to be rebuilt.</p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ── OUTCOMES ── -->
+    <section class="section">
+      <p class="section-label">Outcomes</p>
+      <h2>What changed at launch</h2>
+
+      <div class="outcomes">
+        <div class="outcome">
+          <span class="outcome-icon">✅</span>
+          <div>
+            <p class="outcome-title">Member adoption</p>
+            <p class="outcome-desc">75% adoption among the launch cohort — up from a platform veterans were visiting once and abandoning. Personalized onboarding gave users a clear starting point and a reason to return.</p>
+          </div>
+        </div>
+        <div class="outcome">
+          <span class="outcome-icon">👥</span>
+          <div>
+            <p class="outcome-title">Career coach adoption</p>
+            <p class="outcome-desc">100% of SVA career coaches incorporated APEX into their sessions. The platform became a shared reference point for member goals, skills, and history — replacing side conversations and manual tracking.</p>
+          </div>
+        </div>
+        <div class="outcome">
+          <span class="outcome-icon">🤝</span>
+          <div>
+            <p class="outcome-title">Employer partnerships</p>
+            <p class="outcome-desc">A 60% increase in employer partnerships expanded the job inventory available to members. The platform's ability to deliver targeted, profile-matched candidates made it a more compelling partner offering.</p>
+          </div>
+        </div>
+        <div class="outcome">
+          <span class="outcome-icon">📧</span>
+          <div>
+            <p class="outcome-title">Email engagement</p>
+            <p class="outcome-desc">80% increase in email click-through, indicating members found the matched recommendations more relevant and actionable than the generic outreach that preceded V2.</p>
+          </div>
+        </div>
+      </div>
+      <div class="quote-block" style="margin-top: 32px;">
+        <p class="quote-text">"APEX has allowed us to understand our members' career interests and to better match them with educational opportunities that align with their skills, as well as jobs that are a good fit for them. My coaching sessions are now much more efficient and effective."</p>
+        <div class="quote-meta">
+          <div class="quote-avatar">C</div>
+          <div class="quote-attribution">SVA Career Coach<br>Post-launch feedback</div>
+        </div>
+      </div>
+
+    </section>
+
+
+    <!-- ── MORE WORK ── -->
+    <div class="more-work">
+      <p class="section-label">More work</p>
+
+      <a class="case-study-link" href="https://lauryngoodlett.github.io/subledger/">
+        <p class="case-study-link-tags">Enterprise SaaS · Workflow Design · Systems Thinking</p>
+        <p class="case-study-link-title">Finance Rules Engine — Designing a rule management platform for finance operations, from 5 tools to one.<span class="case-study-link-arrow"> →</span></p>
+      </a>
+
+      <div class="case-study-link" style="cursor: default; opacity: 0.6;">
+        <p class="case-study-link-tags">Coming soon</p>
+        <p class="case-study-link-title">Finance Workbench — Dark mode dashboard for a complex financial data platform.</p>
+      </div>
+    </div>
+
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <p class="footer-heading">let's connect.</p>
+      <div class="footer-links">
+        <a href="https://framerusercontent.com/assets/jMb0P5BuJm1ZGgocCLXu2w1EI0.pdf" class="footer-resume">download resume</a>
+      </div>
+      <div class="footer-links" style="margin-top: 16px;">
+        <a href="mailto:hello@lauryngoodlett.com">hello@lauryngoodlett.com</a>
+        <a href="https://www.linkedin.com/in/lauryngoodlett/">/lauryngoodlett</a>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
